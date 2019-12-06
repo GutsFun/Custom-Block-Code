@@ -1,0 +1,19 @@
+/**
+ * ----------------------------------------------------------------------------
+ * #.# FrontEnd CSS
+ *
+ * BLOCK: Custom Block Code CSS for the frontend.
+ * ----------------------------------------------------------------------------
+ */
+.wp-block-gutsfun-custom-block-code {
+	margin-bottom: 10px;
+}
+
+.wp-block-gutsfun-custom-block-code p {
+    background-color: darkseagreen;
+    color: white;
+    padding-left: 5px;
+    margin: 0px;
+    border: 1px solid grey;
+    border-bottom: none;
+}
