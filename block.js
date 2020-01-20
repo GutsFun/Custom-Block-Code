@@ -29,7 +29,7 @@ registerBlockType('gutsfun/custom-block-code', {
               {
             label: 'Title for Code Block',
             value: attributes.title,
-          onChange: (event) => setAttributes({ title: event.target.value }),
+          onChange: (value) => setAttributes({ title: value }),
             placeholder: __( 'Title or File (optional)' )
           })
              )
