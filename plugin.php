@@ -12,7 +12,7 @@
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+  exit;
 }
 
 /**
@@ -30,7 +30,7 @@ function custom_block_code_backend_assets() {
   wp_enqueue_script(
     'custom-block-code',
     plugins_url('block.js', __FILE__),
-    array('wp-blocks','wp-editor','wp-i18n','wp-element','wp-block-library'),
+    array('wp-blocks','wp-components','wp-editor','wp-i18n','wp-element','wp-block-library'),
     filemtime( plugin_dir_path( __FILE__ ).'block.js' )
   );
 }

@@ -1,11 +1,12 @@
 const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n; 
-const { createElement } = wp.element;
-const { InnerBlocks } = wp.blockEditor;
+const { __ } = wp.i18n;
+const { TextControl, PanelBody, PanelRow } = wp.components;
+const { createElement, Fragment } = wp.element;
+const { InnerBlocks, InspectorControls } = wp.blockEditor;
 
 const ALLOWED_BLOCKS = [];
 const TEMPLATE = [
-	[ 'core/code', { className: 'prettyprint' } ],
+  [ 'core/code', { className: 'prettyprint' } ],
 ];
 
 registerBlockType('gutsfun/custom-block-code', {
@@ -16,34 +17,39 @@ registerBlockType('gutsfun/custom-block-code', {
     title: {type: 'string', source: 'text', selector: 'p'}
   },
   edit: (props) => {
-	const {attributes, setAttributes, className} = props; 
-	  
+  const {attributes, setAttributes, className} = props; 
+    
     return React.createElement(
-      "div",
-      null,
-      React.createElement("label", null, "Header block code title : "),
-      React.createElement("input", {
-		  type: "text",
-		  placeholder: __("Write a title..."),
-		  value: attributes.title,
-		  onChange: (event) => setAttributes({ title: event.target.value })
-        }
-      ),
+      Fragment,
+      null,      
+    React.createElement(InspectorControls, null,
+    React.createElement(PanelBody, { title: __( 'Settings' ), initialOpen: true },
+          React.createElement(PanelRow, null,
+            React.createElement(TextControl,
+              {
+            label: 'Title for Code Block',
+            value: attributes.title,
+          onChange: (event) => setAttributes({ title: event.target.value }),
+            placeholder: __( 'Title or File (optional)' )
+          })
+             )
+           )
+         ),
       React.createElement(InnerBlocks, {
-		  template: TEMPLATE,
-		  allowedBlocks: ALLOWED_BLOCKS,
-		  templateInsertUpdatesSelection: false
-	  })
-  	)
+      template: TEMPLATE,
+      allowedBlocks: ALLOWED_BLOCKS,
+      templateInsertUpdatesSelection: false
+    })
+    )
   },
   save: (props) => {
-	const {attributes, className} = props;
-	const paragraph = createElement("p", null, attributes.title);
-	const innerBlocks = createElement(InnerBlocks.Content, {});
-	const childrens = [];
-	if (attributes.title != null) childrens.push(paragraph);
-	childrens.push(innerBlocks);
-	  
+  const {attributes, className} = props;
+  const paragraph = createElement("p", null, attributes.title);
+  const innerBlocks = createElement(InnerBlocks.Content, {});
+  const childrens = [];
+  if (attributes.title != null) childrens.push(paragraph);
+  childrens.push(innerBlocks);
+    
     return createElement("div", { className }, childrens);
   }
 })
